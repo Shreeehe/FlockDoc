@@ -1,0 +1,455 @@
+{
+  "broiler_diseases": [
+    {
+      "id": "newcastle",
+      "name": "Newcastle Disease",
+      "category": "viral",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["respiratory distress", "gasping", "coughing", "sneezing", "nasal discharge", "greenish diarrhea", "twisted neck", "paralysis", "tremors", "drooping wings", "decreased appetite", "sudden death"],
+      "age_susceptibility": "all ages, severe in young birds",
+      "mortality_rate": "up to 100%",
+      "severity": "critical",
+      "causes": ["Paramyxovirus", "Airborne transmission", "Contaminated equipment", "Wild birds", "Infected poultry"],
+      "treatment": {
+        "medications": ["No specific treatment available", "Supportive care only"],
+        "supportive": ["Electrolytes in water", "Vitamins A, D, E supplementation", "Antibiotics for secondary infections"],
+        "duration": "7-14 days supportive care"
+      },
+      "deficiency_related": false,
+      "prevention": ["Vaccination (live and killed vaccines)", "Strict biosecurity", "Quarantine new birds", "Disinfection protocols"],
+      "facts": [
+        "Newcastle disease is reportable to authorities in most countries",
+        "The virus can survive for weeks in the environment",
+        "Humans can get mild conjunctivitis from the virus",
+        "Vaccination is the primary control measure"
+      ],
+      "droppings_indicators": ["greenish", "watery", "white urates"]
+    },
+    {
+      "id": "ibd_gumboro",
+      "name": "Infectious Bursal Disease (Gumboro)",
+      "category": "viral",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["depression", "ruffled feathers", "whitish watery diarrhea", "vent pecking", "trembling", "prostration", "anorexia", "dehydration", "swollen bursa"],
+      "age_susceptibility": "3-6 weeks (peak at 3-4 weeks)",
+      "mortality_rate": "20-30%",
+      "severity": "high",
+      "causes": ["Birnavirus", "Fecal-oral transmission", "Contaminated litter", "Mechanical vectors"],
+      "treatment": {
+        "medications": ["No specific treatment"],
+        "supportive": ["Electrolytes", "Vitamins", "Probiotics", "Antibiotics for secondary infections"],
+        "duration": "5-7 days"
+      },
+      "deficiency_related": false,
+      "prevention": ["Vaccination at appropriate age", "Good biosecurity", "All-in all-out management", "Proper cleaning between flocks"],
+      "facts": [
+        "IBD destroys the immune system by attacking the bursa of Fabricius",
+        "Recovered birds remain immunosuppressed",
+        "The virus is extremely resistant in the environment",
+        "Maternal antibodies protect for first 2-3 weeks"
+      ],
+      "droppings_indicators": ["whitish", "watery", "mucoid"]
+    },
+    {
+      "id": "avian_influenza",
+      "name": "Avian Influenza (Bird Flu)",
+      "category": "viral",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["sudden death", "respiratory distress", "swollen head", "cyanosis of comb and wattles", "hemorrhages on legs", "diarrhea", "drop in egg production", "soft-shelled eggs", "neurological signs"],
+      "age_susceptibility": "all ages",
+      "mortality_rate": "up to 100% (HPAI)",
+      "severity": "critical",
+      "causes": ["Influenza A virus", "Wild waterfowl", "Contaminated equipment", "Human carriers", "Airborne transmission"],
+      "treatment": {
+        "medications": ["No treatment - culling required for HPAI"],
+        "supportive": ["Supportive care for LPAI only"],
+        "duration": "N/A"
+      },
+      "deficiency_related": false,
+      "prevention": ["Strict biosecurity", "Avoid contact with wild birds", "Vaccination where legal", "Surveillance programs"],
+      "facts": [
+        "Highly Pathogenic AI is a notifiable disease worldwide",
+        "The virus can mutate rapidly",
+        "Some strains can infect humans",
+        "Infected flocks are typically culled"
+      ],
+      "droppings_indicators": ["greenish", "bloody", "watery"]
+    },
+    {
+      "id": "coccidiosis",
+      "name": "Coccidiosis",
+      "category": "parasitic",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["bloody droppings", "pale comb", "weight loss", "reduced feed intake", "huddling", "ruffled feathers", "dehydration", "decreased growth"],
+      "age_susceptibility": "3-8 weeks most susceptible",
+      "mortality_rate": "5-50% depending on species",
+      "severity": "high",
+      "causes": ["Eimeria parasites", "Contaminated litter", "Wet litter conditions", "Overcrowding", "Poor ventilation"],
+      "treatment": {
+        "medications": ["Amprolium", "Toltrazuril", "Sulfonamides", "Diclazuril"],
+        "supportive": ["Vitamin K supplementation", "Iron supplements", "Clean dry litter"],
+        "duration": "5-7 days treatment"
+      },
+      "deficiency_related": false,
+      "prevention": ["Coccidiostats in feed", "Vaccination", "Good litter management", "Proper ventilation", "Avoid overcrowding"],
+      "facts": [
+        "There are 7 species of Eimeria affecting chickens",
+        "E. tenella causes the most severe bloody diarrhea",
+        "Oocysts can survive for months in litter",
+        "Immunity develops after controlled exposure"
+      ],
+      "droppings_indicators": ["bloody", "dark red", "mucoid", "watery"]
+    },
+    {
+      "id": "colibacillosis",
+      "name": "Colibacillosis (E. coli Infection)",
+      "category": "bacterial",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["respiratory distress", "swollen joints", "omphalitis", "perihepatitis", "pericarditis", "airsacculitis", "sudden death", "poor growth"],
+      "age_susceptibility": "all ages, severe in young chicks",
+      "mortality_rate": "5-20%",
+      "severity": "moderate",
+      "causes": ["Escherichia coli bacteria", "Poor hygiene", "Contaminated hatchery", "Immunosuppression", "Respiratory infections"],
+      "treatment": {
+        "medications": ["Enrofloxacin", "Amoxicillin", "Neomycin", "Gentamicin"],
+        "supportive": ["Improve ventilation", "Reduce dust", "Vitamin supplementation"],
+        "duration": "5-7 days antibiotics"
+      },
+      "deficiency_related": false,
+      "prevention": ["Good hatchery hygiene", "Proper ventilation", "Reduce stress", "Control primary infections"],
+      "facts": [
+        "E. coli is often a secondary infection",
+        "Antibiotic resistance is a growing concern",
+        "Good management can prevent most cases",
+        "Multiple organ involvement is common"
+      ],
+      "droppings_indicators": ["yellowish", "mucoid", "watery"]
+    },
+    {
+      "id": "mycoplasma_gallisepticum",
+      "name": "Mycoplasmosis (CRD)",
+      "category": "bacterial",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["respiratory rales", "coughing", "sneezing", "nasal discharge", "swollen sinuses", "foamy eyes", "reduced feed consumption", "poor growth"],
+      "age_susceptibility": "all ages, chronic in layers",
+      "mortality_rate": "5-30% with secondary infections",
+      "severity": "moderate",
+      "causes": ["Mycoplasma gallisepticum", "Egg transmission", "Airborne spread", "Contaminated equipment"],
+      "treatment": {
+        "medications": ["Tylosin", "Tiamulin", "Enrofloxacin", "Tilmicosin"],
+        "supportive": ["Improve ventilation", "Reduce stress", "Vitamin A supplementation"],
+        "duration": "3-5 days treatment"
+      },
+      "deficiency_related": false,
+      "prevention": ["MG-free breeding stock", "Vaccination", "Good biosecurity", "All-in all-out"],
+      "facts": [
+        "MG can be transmitted through eggs",
+        "The organism lacks a cell wall",
+        "Stress triggers clinical disease",
+        "Eradication is difficult once established"
+      ],
+      "droppings_indicators": ["normal or slightly loose"]
+    },
+    {
+      "id": "infectious_bronchitis",
+      "name": "Infectious Bronchitis",
+      "category": "viral",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["respiratory distress", "gasping", "rales", "nasal discharge", "wet eyes", "reduced feed intake", "drop in egg production", "poor shell quality"],
+      "age_susceptibility": "all ages, severe in young chicks",
+      "mortality_rate": "25-30% in young, low in adults",
+      "severity": "moderate",
+      "causes": ["Coronavirus", "Airborne transmission", "Contaminated equipment", "Multiple serotypes"],
+      "treatment": {
+        "medications": ["No specific treatment"],
+        "supportive": ["Increase brooder temperature", "Electrolytes", "Antibiotics for secondary infections"],
+        "duration": "7-10 days supportive"
+      },
+      "deficiency_related": false,
+      "prevention": ["Vaccination with multiple serotypes", "Good biosecurity", "Proper ventilation"],
+      "facts": [
+        "Many different serotypes exist worldwide",
+        "Cross-protection between serotypes is limited",
+        "The virus can affect kidneys in some strains",
+        "Recovered layers may never regain full production"
+      ],
+      "droppings_indicators": ["watery", "whitish urates"]
+    },
+    {
+      "id": "aspergillosis",
+      "name": "Aspergillosis (Brooder Pneumonia)",
+      "category": "fungal",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["gasping", "respiratory distress", "increased thirst", "emaciation", "nervous signs", "eye lesions", "sudden death in chicks"],
+      "age_susceptibility": "young chicks most susceptible",
+      "mortality_rate": "5-50%",
+      "severity": "high",
+      "causes": ["Aspergillus fumigatus fungus", "Moldy feed", "Moldy litter", "Contaminated hatchery", "Poor ventilation"],
+      "treatment": {
+        "medications": ["Nystatin", "Copper sulfate", "Antifungals"],
+        "supportive": ["Remove moldy material", "Improve ventilation", "Vitamin A supplementation"],
+        "duration": "7-14 days"
+      },
+      "deficiency_related": false,
+      "prevention": ["Use clean litter", "Store feed properly", "Good hatchery sanitation", "Proper ventilation"],
+      "facts": [
+        "Spores are everywhere in the environment",
+        "Once established in lungs, difficult to treat",
+        "Immunosuppressed birds are most susceptible",
+        "Prevention is more effective than treatment"
+      ],
+      "droppings_indicators": ["normal or slightly loose"]
+    },
+    {
+      "id": "fowl_cholera",
+      "name": "Fowl Cholera",
+      "category": "bacterial",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["sudden death", "greenish diarrhea", "swollen wattles", "lameness", "respiratory distress", "cyanosis", "torticollis"],
+      "age_susceptibility": "older birds (>16 weeks) more susceptible",
+      "mortality_rate": "up to 50%",
+      "severity": "high",
+      "causes": ["Pasteurella multocida", "Carrier birds", "Rodents", "Contaminated water", "Wild birds"],
+      "treatment": {
+        "medications": ["Sulfonamides", "Tetracyclines", "Penicillin", "Enrofloxacin"],
+        "supportive": ["Cull carriers", "Improve sanitation"],
+        "duration": "5-7 days treatment"
+      },
+      "deficiency_related": false,
+      "prevention": ["Vaccination", "Rodent control", "Water sanitation", "Cull carriers"],
+      "facts": [
+        "Recovered birds become chronic carriers",
+        "Stress can trigger outbreaks in carriers",
+        "Rodents are important reservoirs",
+        "The bacterium survives in soil for months"
+      ],
+      "droppings_indicators": ["greenish", "yellowish", "watery"]
+    },
+    {
+      "id": "mareks_disease",
+      "name": "Marek's Disease",
+      "category": "viral",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["progressive paralysis", "leg paralysis", "wing drooping", "twisted neck", "weight loss", "blindness", "iris irregularities", "tumors"],
+      "age_susceptibility": "12-24 weeks typically",
+      "mortality_rate": "10-50%",
+      "severity": "high",
+      "causes": ["Herpesvirus", "Feather dander", "Airborne transmission", "Long environmental survival"],
+      "treatment": {
+        "medications": ["No treatment available"],
+        "supportive": ["Cull affected birds", "Supportive care only"],
+        "duration": "N/A"
+      },
+      "deficiency_related": false,
+      "prevention": ["Day-old vaccination only", "Buy vaccinated chicks", "Good biosecurity"],
+      "facts": [
+        "Vaccination does not prevent infection, only tumors",
+        "The virus is shed in feather dander for life",
+        "Vaccinated birds can still transmit the virus",
+        "Most commercial chicks are vaccinated at hatch"
+      ],
+      "droppings_indicators": ["normal"]
+    }
+  ],
+  "layer_specific": [
+    {
+      "id": "egg_drop_syndrome",
+      "name": "Egg Drop Syndrome (EDS-76)",
+      "category": "viral",
+      "affects": ["layer"],
+      "symptoms": ["sudden drop in production", "soft-shelled eggs", "shell-less eggs", "pale shells", "rough shells", "watery albumin", "no other signs"],
+      "age_susceptibility": "peak production (26-35 weeks)",
+      "mortality_rate": "minimal",
+      "severity": "moderate",
+      "causes": ["Adenovirus", "Vertical transmission", "Contaminated vaccines historically"],
+      "treatment": {
+        "medications": ["No treatment available"],
+        "supportive": ["Supportive nutrition", "Calcium supplementation"],
+        "duration": "Recovery in 4-10 weeks"
+      },
+      "deficiency_related": false,
+      "prevention": ["Vaccination before lay", "Use EDS-free breeding stock"],
+      "facts": [
+        "Production may never return to pre-infection levels",
+        "The virus affects the shell gland",
+        "Brown egg layers are more severely affected",
+        "Duck origin virus adapted to chickens"
+      ],
+      "droppings_indicators": ["normal"]
+    },
+    {
+      "id": "fatty_liver_syndrome",
+      "name": "Fatty Liver Hemorrhagic Syndrome",
+      "category": "metabolic",
+      "affects": ["layer"],
+      "symptoms": ["sudden death", "pale comb", "obesity", "decreased egg production", "thin-shelled eggs", "birds found dead"],
+      "age_susceptibility": "peak production layers",
+      "mortality_rate": "2-5%",
+      "severity": "moderate",
+      "causes": ["High energy diet", "Low protein diet", "Lack of exercise", "Heat stress", "Genetic factors"],
+      "treatment": {
+        "medications": ["Choline chloride", "Vitamin E", "Methionine", "Inositol"],
+        "supportive": ["Reduce energy in feed", "Increase fiber", "Avoid heat stress"],
+        "duration": "Ongoing management"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Choline", "Methionine", "Vitamin E"],
+      "prevention": ["Balanced diet", "Proper feed formulation", "Avoid over-feeding", "Good ventilation"],
+      "facts": [
+        "Most common in caged layers",
+        "Hot weather increases risk",
+        "Liver becomes pale and friable",
+        "Often found dead with no prior signs"
+      ],
+      "droppings_indicators": ["normal"]
+    },
+    {
+      "id": "cage_layer_fatigue",
+      "name": "Cage Layer Fatigue",
+      "category": "metabolic",
+      "affects": ["layer"],
+      "symptoms": ["paralysis", "inability to stand", "soft bones", "broken bones", "thin-shelled eggs", "death from dehydration"],
+      "age_susceptibility": "high producing layers",
+      "mortality_rate": "1-5%",
+      "severity": "moderate",
+      "causes": ["Calcium deficiency", "Phosphorus imbalance", "Vitamin D3 deficiency", "High production demand"],
+      "treatment": {
+        "medications": ["Injectable calcium gluconate", "Vitamin D3 supplementation"],
+        "supportive": ["Hand feeding and watering", "Floor housing"],
+        "duration": "Recovery in 7-14 days if caught early"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Calcium", "Phosphorus", "Vitamin D3"],
+      "prevention": ["Adequate calcium in diet (4-4.5%)", "Proper Ca:P ratio", "Vitamin D3 supplementation"],
+      "facts": [
+        "Also called osteoporosis in layers",
+        "High producers are most at risk",
+        "Recovery is possible if treated early",
+        "Bones may be paper-thin at necropsy"
+      ],
+      "droppings_indicators": ["normal"]
+    }
+  ],
+  "nutritional_deficiencies": [
+    {
+      "id": "vitamin_a_deficiency",
+      "name": "Vitamin A Deficiency",
+      "category": "nutritional",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["cheesy material in eyes", "swollen eyelids", "blindness", "nasal discharge", "weakness", "poor growth", "rough feathers", "white pustules in mouth"],
+      "severity": "moderate",
+      "causes": ["Deficient diet", "Poor quality feed", "Feed storage issues", "Liver disease"],
+      "treatment": {
+        "medications": ["Vitamin A injection", "Vitamin A water-soluble"],
+        "supportive": ["Improve feed quality", "Add vitamin premix"],
+        "duration": "7-14 days supplementation"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Vitamin A"],
+      "prevention": ["Adequate vitamin premix in feed", "Proper feed storage", "Quality feed ingredients"],
+      "facts": [
+        "Yellow corn provides vitamin A precursors",
+        "Deficiency increases susceptibility to infections",
+        "Night blindness is an early sign",
+        "Common in birds fed grain-only diets"
+      ],
+      "droppings_indicators": ["normal or whitish deposits"]
+    },
+    {
+      "id": "vitamin_d_deficiency",
+      "name": "Vitamin D3 Deficiency (Rickets)",
+      "category": "nutritional",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["soft bones", "bent legs", "beading of ribs", "rubbery beak", "lameness", "poor growth", "thin-shelled eggs", "decreased production"],
+      "severity": "moderate",
+      "causes": ["Deficient diet", "Lack of sunlight", "Kidney disease", "Imbalanced Ca:P ratio"],
+      "treatment": {
+        "medications": ["Vitamin D3 injection", "Water-soluble D3"],
+        "supportive": ["Correct Ca:P ratio", "Improve nutrition"],
+        "duration": "14-21 days for improvement"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Vitamin D3", "Calcium", "Phosphorus"],
+      "prevention": ["Adequate D3 in feed", "Proper Ca:P ratio (2:1)", "Sunlight exposure if possible"],
+      "facts": [
+        "Chickens need D3, not D2",
+        "Essential for calcium absorption",
+        "Indoor birds depend entirely on dietary D3",
+        "Affects bone development and eggshells"
+      ],
+      "droppings_indicators": ["normal"]
+    },
+    {
+      "id": "vitamin_e_deficiency",
+      "name": "Vitamin E/Selenium Deficiency",
+      "category": "nutritional",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["encephalomalacia (crazy chick disease)", "exudative diathesis", "muscular dystrophy", "twisted neck", "falling over", "paralysis", "green skin"],
+      "severity": "high",
+      "causes": ["Deficient diet", "Rancid fat in feed", "Selenium deficient soil", "High polyunsaturated fat diet"],
+      "treatment": {
+        "medications": ["Vitamin E injection", "Selenium injection", "Water-soluble E/Se"],
+        "supportive": ["Remove rancid feed", "Fresh feed"],
+        "duration": "7-14 days"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Vitamin E", "Selenium"],
+      "prevention": ["Adequate E/Se in feed", "Fresh feed ingredients", "Proper feed storage"],
+      "facts": [
+        "Crazy chick disease causes brain damage",
+        "Exudative diathesis causes subcutaneous edema",
+        "Vitamin E and selenium work together",
+        "Rancid fat depletes vitamin E"
+      ],
+      "droppings_indicators": ["normal"]
+    },
+    {
+      "id": "vitamin_b_deficiency",
+      "name": "B-Vitamin Deficiencies",
+      "category": "nutritional",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["curled toe paralysis (B2)", "dermatitis (B3, B5, B7)", "perosis (B4, Mn)", "anemia (B12)", "poor growth", "poor feathering", "weakness"],
+      "severity": "moderate",
+      "causes": ["Deficient diet", "Poor feed quality", "Moldy feed destroys B vitamins"],
+      "treatment": {
+        "medications": ["B-vitamin complex injection", "Water-soluble B vitamins"],
+        "supportive": ["Improve feed quality", "Remove moldy feed"],
+        "duration": "7-14 days"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Thiamine (B1)", "Riboflavin (B2)", "Niacin (B3)", "Pantothenic acid (B5)", "Biotin (B7)", "Cobalamin (B12)", "Choline (B4)"],
+      "prevention": ["Complete vitamin premix", "Quality feed ingredients", "Proper feed storage"],
+      "facts": [
+        "B2 deficiency causes classic curled toe paralysis",
+        "Choline deficiency causes slipped tendon",
+        "Many B vitamins are destroyed by heat and light",
+        "Adequate B vitamins essential for metabolism"
+      ],
+      "droppings_indicators": ["normal"]
+    },
+    {
+      "id": "calcium_deficiency",
+      "name": "Calcium Deficiency",
+      "category": "nutritional",
+      "affects": ["broiler", "layer"],
+      "symptoms": ["thin-shelled eggs", "shell-less eggs", "soft bones", "lameness", "paralysis", "decreased production", "feather pecking"],
+      "severity": "moderate",
+      "causes": ["Low calcium diet", "Wrong particle size", "Vitamin D3 deficiency", "High phosphorus"],
+      "treatment": {
+        "medications": ["Calcium gluconate injection (acute)", "Oyster shell/limestone"],
+        "supportive": ["Add calcium sources", "Correct Ca:P ratio"],
+        "duration": "Improvement in 1-2 weeks"
+      },
+      "deficiency_related": true,
+      "deficiency": ["Calcium"],
+      "prevention": ["4-4.5% calcium for layers", "Large particle calcium", "Adequate D3"],
+      "facts": [
+        "Layers need 4+ grams calcium daily",
+        "Large particles of calcium stay in gizzard longer",
+        "Night feeding of calcium helps shell quality",
+        "Broilers need less calcium than layers"
+      ],
+      "droppings_indicators": ["normal"]
+    }
+  ]
+}

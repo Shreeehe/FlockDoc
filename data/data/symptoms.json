@@ -1,0 +1,481 @@
+{
+    "symptom_categories": {
+        "respiratory": {
+            "name": "Respiratory Symptoms",
+            "symptoms": [
+                {
+                    "id": "gasping",
+                    "name": "Gasping for air",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "coughing",
+                    "name": "Coughing",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "sneezing",
+                    "name": "Sneezing",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "nasal_discharge",
+                    "name": "Nasal discharge",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "rales",
+                    "name": "Respiratory rales/rattling",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "foamy_eyes",
+                    "name": "Foamy/swollen eyes",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "swollen_sinuses",
+                    "name": "Swollen sinuses",
+                    "severity_weight": 2
+                }
+            ]
+        },
+        "digestive": {
+            "name": "Digestive Symptoms",
+            "symptoms": [
+                {
+                    "id": "diarrhea",
+                    "name": "Diarrhea",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "bloody_droppings",
+                    "name": "Bloody droppings",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "green_droppings",
+                    "name": "Green droppings",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "white_droppings",
+                    "name": "White/chalky droppings",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "watery_droppings",
+                    "name": "Watery droppings",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "reduced_appetite",
+                    "name": "Reduced appetite",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "anorexia",
+                    "name": "Complete loss of appetite",
+                    "severity_weight": 2
+                }
+            ]
+        },
+        "neurological": {
+            "name": "Neurological Symptoms",
+            "symptoms": [
+                {
+                    "id": "twisted_neck",
+                    "name": "Twisted neck (torticollis)",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "paralysis",
+                    "name": "Paralysis",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "tremors",
+                    "name": "Tremors/shaking",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "incoordination",
+                    "name": "Incoordination",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "circling",
+                    "name": "Walking in circles",
+                    "severity_weight": 3
+                }
+            ]
+        },
+        "physical": {
+            "name": "Physical Symptoms",
+            "symptoms": [
+                {
+                    "id": "ruffled_feathers",
+                    "name": "Ruffled feathers",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "drooping_wings",
+                    "name": "Drooping wings",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "lameness",
+                    "name": "Lameness",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "swollen_joints",
+                    "name": "Swollen joints",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "pale_comb",
+                    "name": "Pale comb/wattles",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "cyanotic_comb",
+                    "name": "Blue/purple comb",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "swollen_head",
+                    "name": "Swollen head",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "weight_loss",
+                    "name": "Weight loss",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "dehydration",
+                    "name": "Dehydration",
+                    "severity_weight": 2
+                }
+            ]
+        },
+        "behavioral": {
+            "name": "Behavioral Symptoms",
+            "symptoms": [
+                {
+                    "id": "depression",
+                    "name": "Depression/lethargy",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "huddling",
+                    "name": "Huddling together",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "reduced_movement",
+                    "name": "Reduced movement",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "isolation",
+                    "name": "Isolating from flock",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "increased_thirst",
+                    "name": "Increased water consumption",
+                    "severity_weight": 1
+                }
+            ]
+        },
+        "production": {
+            "name": "Production Symptoms (Layers)",
+            "symptoms": [
+                {
+                    "id": "drop_production",
+                    "name": "Drop in egg production",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "soft_shells",
+                    "name": "Soft-shelled eggs",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "shell_less",
+                    "name": "Shell-less eggs",
+                    "severity_weight": 2
+                },
+                {
+                    "id": "poor_shell_quality",
+                    "name": "Poor shell quality",
+                    "severity_weight": 1
+                },
+                {
+                    "id": "abnormal_eggs",
+                    "name": "Abnormal egg shape/color",
+                    "severity_weight": 2
+                }
+            ]
+        },
+        "mortality": {
+            "name": "Mortality Patterns",
+            "symptoms": [
+                {
+                    "id": "sudden_death",
+                    "name": "Sudden death",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "high_mortality",
+                    "name": "High mortality rate",
+                    "severity_weight": 3
+                },
+                {
+                    "id": "gradual_death",
+                    "name": "Gradual increase in deaths",
+                    "severity_weight": 2
+                }
+            ]
+        }
+    },
+    "disease_symptom_mapping": {
+        "newcastle": [
+            "gasping",
+            "coughing",
+            "sneezing",
+            "nasal_discharge",
+            "green_droppings",
+            "twisted_neck",
+            "paralysis",
+            "tremors",
+            "drooping_wings",
+            "reduced_appetite",
+            "sudden_death"
+        ],
+        "ibd_gumboro": [
+            "depression",
+            "ruffled_feathers",
+            "white_droppings",
+            "watery_droppings",
+            "tremors",
+            "anorexia",
+            "dehydration",
+            "huddling"
+        ],
+        "avian_influenza": [
+            "sudden_death",
+            "gasping",
+            "swollen_head",
+            "cyanotic_comb",
+            "diarrhea",
+            "drop_production",
+            "soft_shells",
+            "twisted_neck",
+            "high_mortality"
+        ],
+        "coccidiosis": [
+            "bloody_droppings",
+            "pale_comb",
+            "weight_loss",
+            "reduced_appetite",
+            "huddling",
+            "ruffled_feathers",
+            "dehydration"
+        ],
+        "colibacillosis": [
+            "gasping",
+            "swollen_joints",
+            "sudden_death",
+            "ruffled_feathers",
+            "reduced_movement"
+        ],
+        "mycoplasma_gallisepticum": [
+            "rales",
+            "coughing",
+            "sneezing",
+            "nasal_discharge",
+            "swollen_sinuses",
+            "foamy_eyes",
+            "reduced_appetite"
+        ],
+        "infectious_bronchitis": [
+            "gasping",
+            "rales",
+            "nasal_discharge",
+            "foamy_eyes",
+            "reduced_appetite",
+            "drop_production",
+            "poor_shell_quality"
+        ],
+        "aspergillosis": [
+            "gasping",
+            "increased_thirst",
+            "weight_loss",
+            "ruffled_feathers",
+            "sudden_death"
+        ],
+        "fowl_cholera": [
+            "sudden_death",
+            "green_droppings",
+            "lameness",
+            "gasping",
+            "cyanotic_comb",
+            "twisted_neck",
+            "high_mortality"
+        ],
+        "mareks_disease": [
+            "paralysis",
+            "drooping_wings",
+            "twisted_neck",
+            "weight_loss",
+            "depression"
+        ],
+        "egg_drop_syndrome": [
+            "drop_production",
+            "soft_shells",
+            "shell_less",
+            "poor_shell_quality",
+            "abnormal_eggs"
+        ],
+        "fatty_liver_syndrome": [
+            "sudden_death",
+            "pale_comb",
+            "drop_production",
+            "soft_shells"
+        ],
+        "cage_layer_fatigue": [
+            "paralysis",
+            "lameness",
+            "soft_shells",
+            "drop_production"
+        ],
+        "vitamin_a_deficiency": [
+            "foamy_eyes",
+            "nasal_discharge",
+            "ruffled_feathers",
+            "weight_loss"
+        ],
+        "vitamin_d_deficiency": [
+            "lameness",
+            "ruffled_feathers",
+            "soft_shells",
+            "drop_production"
+        ],
+        "vitamin_e_deficiency": [
+            "twisted_neck",
+            "paralysis",
+            "incoordination",
+            "tremors"
+        ],
+        "vitamin_b_deficiency": [
+            "paralysis",
+            "lameness",
+            "ruffled_feathers",
+            "weight_loss"
+        ],
+        "calcium_deficiency": [
+            "soft_shells",
+            "shell_less",
+            "lameness",
+            "paralysis",
+            "drop_production"
+        ]
+    },
+    "droppings_analysis": {
+        "normal": {
+            "description": "Normal droppings are brown/gray with white urate caps",
+            "indicates": [
+                "healthy bird",
+                "normal digestion"
+            ]
+        },
+        "bloody": {
+            "description": "Blood in droppings, dark red to bright red",
+            "indicates": [
+                "coccidiosis",
+                "hemorrhagic enteritis",
+                "internal injury"
+            ],
+            "severity": "high",
+            "associated_diseases": [
+                "coccidiosis"
+            ]
+        },
+        "greenish": {
+            "description": "Green colored droppings",
+            "indicates": [
+                "bile in droppings",
+                "reduced feed intake",
+                "viral infections"
+            ],
+            "severity": "moderate",
+            "associated_diseases": [
+                "newcastle",
+                "avian_influenza",
+                "fowl_cholera"
+            ]
+        },
+        "yellowish": {
+            "description": "Yellow or mustard colored droppings",
+            "indicates": [
+                "bacterial infection",
+                "liver issues"
+            ],
+            "severity": "moderate",
+            "associated_diseases": [
+                "colibacillosis",
+                "fowl_cholera"
+            ]
+        },
+        "whitish": {
+            "description": "White, chalky, or pale droppings",
+            "indicates": [
+                "excess urates",
+                "kidney issues",
+                "viral infections"
+            ],
+            "severity": "moderate",
+            "associated_diseases": [
+                "ibd_gumboro",
+                "infectious_bronchitis"
+            ]
+        },
+        "watery": {
+            "description": "Very liquid, watery droppings",
+            "indicates": [
+                "diarrhea",
+                "infection",
+                "kidney issues"
+            ],
+            "severity": "moderate",
+            "associated_diseases": [
+                "ibd_gumboro",
+                "coccidiosis",
+                "colibacillosis"
+            ]
+        },
+        "foamy": {
+            "description": "Foamy or bubbly droppings",
+            "indicates": [
+                "malabsorption",
+                "intestinal upset"
+            ],
+            "severity": "low",
+            "associated_diseases": []
+        },
+        "mucoid": {
+            "description": "Mucus in droppings",
+            "indicates": [
+                "intestinal inflammation",
+                "parasites"
+            ],
+            "severity": "moderate",
+            "associated_diseases": [
+                "coccidiosis"
+            ]
+        }
+    }
+}

@@ -1,0 +1,306 @@
+{
+    "medications": {
+        "antibiotics": [
+            {
+                "name": "Enrofloxacin",
+                "brand_names": [
+                    "Baytril",
+                    "Enrocin"
+                ],
+                "type": "Fluoroquinolone",
+                "spectrum": "Broad spectrum",
+                "dosage": "10 mg/kg body weight OR 0.5 ml per liter of water",
+                "duration": "3-5 days",
+                "withdrawal_period": "7 days meat, 3 days eggs",
+                "indications": [
+                    "E. coli",
+                    "Salmonella",
+                    "Pasteurella",
+                    "Mycoplasma"
+                ],
+                "notes": "Do not use in layers producing eggs for human consumption in some countries"
+            },
+            {
+                "name": "Amoxicillin",
+                "brand_names": [
+                    "Amoxil",
+                    "Moxivet"
+                ],
+                "type": "Penicillin",
+                "spectrum": "Broad spectrum",
+                "dosage": "10-20 mg/kg OR 1 gram per 2 liters of water",
+                "duration": "3-5 days",
+                "withdrawal_period": "5 days",
+                "indications": [
+                    "E. coli",
+                    "Streptococcus",
+                    "Staphylococcus"
+                ],
+                "notes": "Safe for use in layers"
+            },
+            {
+                "name": "Tylosin",
+                "brand_names": [
+                    "Tylan",
+                    "Tylomed"
+                ],
+                "type": "Macrolide",
+                "spectrum": "Mycoplasma specific",
+                "dosage": "0.5 gram per liter of water",
+                "duration": "3-5 days",
+                "withdrawal_period": "5 days",
+                "indications": [
+                    "Mycoplasma gallisepticum",
+                    "Mycoplasma synoviae"
+                ],
+                "notes": "First choice for CRD"
+            },
+            {
+                "name": "Tiamulin",
+                "brand_names": [
+                    "Denagard",
+                    "Tiamvet"
+                ],
+                "type": "Pleuromutilin",
+                "spectrum": "Mycoplasma, some gram positive",
+                "dosage": "12.5-25 mg/kg OR 0.25 ml per liter",
+                "duration": "3-5 days",
+                "withdrawal_period": "1 day",
+                "indications": [
+                    "Mycoplasma",
+                    "Brachyspira"
+                ],
+                "notes": "Do not combine with ionophore coccidiostats"
+            },
+            {
+                "name": "Sulfonamides",
+                "brand_names": [
+                    "Sulfadiazine",
+                    "Sulfaquinoxaline"
+                ],
+                "type": "Sulfonamide",
+                "spectrum": "Broad spectrum + antiprotozoal",
+                "dosage": "1 gram per liter of water",
+                "duration": "3-5 days",
+                "withdrawal_period": "10-14 days",
+                "indications": [
+                    "Coccidiosis",
+                    "Pasteurella",
+                    "E. coli"
+                ],
+                "notes": "Also has anticoccidial activity"
+            },
+            {
+                "name": "Tetracycline",
+                "brand_names": [
+                    "Terramycin",
+                    "Oxytetracycline"
+                ],
+                "type": "Tetracycline",
+                "spectrum": "Broad spectrum",
+                "dosage": "500 mg per liter of water",
+                "duration": "5-7 days",
+                "withdrawal_period": "7 days",
+                "indications": [
+                    "CRD",
+                    "Pasteurella",
+                    "General infections"
+                ],
+                "notes": "Avoid in young birds, interferes with calcium"
+            }
+        ],
+        "anticoccidials": [
+            {
+                "name": "Amprolium",
+                "brand_names": [
+                    "Corid",
+                    "Amprol"
+                ],
+                "type": "Thiamine antagonist",
+                "dosage": "1.25 ml per liter for treatment, 0.5 ml for prevention",
+                "duration": "5-7 days treatment, 21 days prevention",
+                "withdrawal_period": "0 days",
+                "indications": [
+                    "Coccidiosis treatment"
+                ],
+                "notes": "Can be used in layers, give vitamin B1 after treatment"
+            },
+            {
+                "name": "Toltrazuril",
+                "brand_names": [
+                    "Baycox",
+                    "Toltrex"
+                ],
+                "type": "Triazinone",
+                "dosage": "7 mg/kg OR 1 ml per liter for 2 days",
+                "duration": "2 days",
+                "withdrawal_period": "14 days",
+                "indications": [
+                    "Coccidiosis treatment"
+                ],
+                "notes": "Very effective, single treatment often sufficient"
+            },
+            {
+                "name": "Diclazuril",
+                "brand_names": [
+                    "Clinacox",
+                    "Diclosol"
+                ],
+                "type": "Benzeneacetonitrile",
+                "dosage": "1 mg/kg in feed",
+                "duration": "Continuous in feed",
+                "withdrawal_period": "0 days",
+                "indications": [
+                    "Coccidiosis prevention"
+                ],
+                "notes": "Feed additive for prevention"
+            }
+        ],
+        "vitamins": [
+            {
+                "name": "Vitamin A",
+                "dosage": "10,000-20,000 IU per bird injectable OR in water",
+                "duration": "7-14 days",
+                "indications": [
+                    "Vitamin A deficiency",
+                    "Eye problems",
+                    "Respiratory support"
+                ]
+            },
+            {
+                "name": "Vitamin D3",
+                "dosage": "2,000-4,000 IU per kg feed",
+                "duration": "Continuous",
+                "indications": [
+                    "Rickets",
+                    "Soft bones",
+                    "Cage layer fatigue",
+                    "Poor shell quality"
+                ]
+            },
+            {
+                "name": "Vitamin E + Selenium",
+                "dosage": "100 IU Vitamin E + 0.3 ppm Selenium per kg feed",
+                "duration": "Continuous or 7-14 days treatment",
+                "indications": [
+                    "Encephalomalacia",
+                    "Exudative diathesis",
+                    "Muscular dystrophy"
+                ]
+            },
+            {
+                "name": "Vitamin K",
+                "dosage": "2-5 mg per kg feed or water soluble",
+                "duration": "During coccidiosis outbreak",
+                "indications": [
+                    "Bleeding disorders",
+                    "Coccidiosis supportive treatment"
+                ]
+            },
+            {
+                "name": "B-Complex",
+                "dosage": "As per manufacturer recommendation",
+                "duration": "5-7 days or continuous",
+                "indications": [
+                    "Curled toe paralysis",
+                    "Dermatitis",
+                    "General support"
+                ]
+            },
+            {
+                "name": "Electrolytes",
+                "dosage": "1-2 grams per liter of water",
+                "duration": "3-5 days during stress/illness",
+                "indications": [
+                    "Dehydration",
+                    "Heat stress",
+                    "Any illness",
+                    "Post-vaccination"
+                ]
+            }
+        ],
+        "minerals": [
+            {
+                "name": "Calcium (Limestone/Oyster shell)",
+                "dosage": "4-4.5% of diet for layers, 1% for broilers",
+                "indications": [
+                    "Soft shells",
+                    "Cage layer fatigue",
+                    "Poor production"
+                ]
+            },
+            {
+                "name": "Calcium Gluconate",
+                "dosage": "1-2 ml per bird subcutaneously (10% solution)",
+                "indications": [
+                    "Acute calcium deficiency",
+                    "Cage layer fatigue (emergency)"
+                ]
+            },
+            {
+                "name": "Phosphorus (DCP/MCP)",
+                "dosage": "0.4-0.5% available phosphorus in diet",
+                "indications": [
+                    "Bone problems",
+                    "To maintain Ca:P ratio"
+                ]
+            }
+        ]
+    },
+    "treatment_protocols": {
+        "coccidiosis": {
+            "mild": {
+                "primary": "Amprolium 0.5 ml/L for 5 days",
+                "supportive": [
+                    "Vitamin K supplementation",
+                    "Keep litter dry"
+                ],
+                "follow_up": "Vitamin B1 after treatment"
+            },
+            "severe": {
+                "primary": "Toltrazuril 1 ml/L for 2 days OR Sulfonamides 1g/L for 5 days",
+                "supportive": [
+                    "Vitamin K injection",
+                    "Electrolytes",
+                    "Iron supplement"
+                ],
+                "follow_up": "Amprolium prevention dose for 14 days"
+            }
+        },
+        "respiratory_infection": {
+            "mild": {
+                "primary": "Tylosin 0.5g/L for 3-5 days",
+                "supportive": [
+                    "Improve ventilation",
+                    "Reduce dust",
+                    "Vitamins AD3E"
+                ]
+            },
+            "severe": {
+                "primary": "Enrofloxacin 0.5ml/L for 5 days + Tylosin 0.5g/L",
+                "supportive": [
+                    "Increase brooder temperature",
+                    "Steam inhalation if possible",
+                    "Electrolytes"
+                ]
+            }
+        },
+        "bacterial_enteritis": {
+            "primary": "Amoxicillin 1g/2L for 5 days OR Enrofloxacin",
+            "supportive": [
+                "Probiotics after antibiotics",
+                "Electrolytes",
+                "Reduce feed temporarily"
+            ]
+        },
+        "nutritional_deficiency": {
+            "primary": "Specific vitamin/mineral supplementation as needed",
+            "supportive": [
+                "Review feed formulation",
+                "Check feed storage",
+                "Ensure fresh feed"
+            ],
+            "duration": "7-14 days intensive, then maintenance"
+        }
+    }
+}

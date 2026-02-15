@@ -101,6 +101,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
   transition: background var(--transition), color var(--transition);
 }
 
@@ -758,6 +759,7 @@ a:hover {
   /* mobile-first: no sidebar offset */
   margin-top: var(--navbar-height);
   height: calc(100vh - var(--navbar-height) - var(--mobile-nav-height));
+  height: calc(100dvh - var(--navbar-height) - var(--mobile-nav-height));
   overflow-y: auto;
   background: var(--bg);
   transition: background var(--transition);
@@ -1326,10 +1328,11 @@ a:hover {
 
 /* Chat input area */
 .chat-input-area {
-  padding: 10px 16px 12px;
+  padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--border);
   background: var(--bg);
   transition: background var(--transition), border-color var(--transition);
+  flex-shrink: 0;
 }
 
 .chat-input-row {
@@ -2054,7 +2057,8 @@ a:hover {
   background: var(--bg);
   border-top: 1px solid var(--border);
   z-index: 100;
-  height: var(--mobile-nav-height);
+  height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   transition: background var(--transition), border-color var(--transition);
 }
 

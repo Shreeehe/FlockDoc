@@ -1,0 +1,412 @@
+{
+    "broiler_vaccination": {
+        "title": "Broiler Vaccination Schedule",
+        "duration": "35-42 days",
+        "schedule": [
+            {
+                "day": 1,
+                "age": "Day 1",
+                "vaccine": "Marek's Disease + ND-IB",
+                "route": "Subcutaneous/Spray at hatchery",
+                "notes": "Usually done at hatchery before delivery"
+            },
+            {
+                "day": 7,
+                "age": "Day 7",
+                "vaccine": "Newcastle Disease (Lasota/B1)",
+                "route": "Eye drop/Drinking water",
+                "notes": "First field vaccination"
+            },
+            {
+                "day": 14,
+                "age": "Day 14",
+                "vaccine": "IBD/Gumboro (Intermediate)",
+                "route": "Drinking water",
+                "notes": "Critical for immunity; timing depends on maternal antibody"
+            },
+            {
+                "day": 21,
+                "age": "Day 21",
+                "vaccine": "IBD Booster (if needed)",
+                "route": "Drinking water",
+                "notes": "Only if high challenge area"
+            },
+            {
+                "day": 24,
+                "age": "Day 24",
+                "vaccine": "Newcastle Disease Booster",
+                "route": "Drinking water",
+                "notes": "Optional but recommended"
+            }
+        ],
+        "tips": [
+            "Vaccinate only healthy birds",
+            "Use clean, chlorine-free water for vaccines",
+            "Vaccinate early morning when birds are thirsty",
+            "Prepare only the amount needed - don't store reconstituted vaccine",
+            "Keep vaccines cold (2-8°C) until use"
+        ]
+    },
+    "layer_vaccination": {
+        "title": "Layer Vaccination Schedule",
+        "duration": "Up to 72 weeks",
+        "schedule": [
+            {
+                "day": 1,
+                "age": "Day 1",
+                "vaccine": "Marek's Disease (HVT+SB1)",
+                "route": "Subcutaneous at hatchery",
+                "notes": "Must be given at hatchery"
+            },
+            {
+                "day": 7,
+                "age": "Day 7",
+                "vaccine": "ND + IB (Live)",
+                "route": "Eye drop/Spray",
+                "notes": "First respiratory protection"
+            },
+            {
+                "day": 14,
+                "age": "Day 14",
+                "vaccine": "IBD (Intermediate)",
+                "route": "Drinking water",
+                "notes": "Critical vaccination"
+            },
+            {
+                "day": 21,
+                "age": "Day 21",
+                "vaccine": "ND + IB Booster",
+                "route": "Drinking water",
+                "notes": "Strengthen respiratory immunity"
+            },
+            {
+                "day": 28,
+                "age": "Day 28",
+                "vaccine": "IBD Booster + Fowl Pox",
+                "route": "Drinking water / Wing web",
+                "notes": "Fowl Pox by wing web method"
+            },
+            {
+                "day": 42,
+                "age": "Week 6",
+                "vaccine": "ND + IB (Live)",
+                "route": "Drinking water",
+                "notes": "Continue protection"
+            },
+            {
+                "day": 56,
+                "age": "Week 8",
+                "vaccine": "Fowl Cholera (if endemic)",
+                "route": "Subcutaneous",
+                "notes": "Only in cholera-prone areas"
+            },
+            {
+                "day": 70,
+                "age": "Week 10",
+                "vaccine": "ND + IB (Live)",
+                "route": "Drinking water",
+                "notes": "Maintain immunity"
+            },
+            {
+                "day": 84,
+                "age": "Week 12",
+                "vaccine": "Infectious Coryza",
+                "route": "Subcutaneous",
+                "notes": "If coryza is a problem in area"
+            },
+            {
+                "day": 112,
+                "age": "Week 16",
+                "vaccine": "ND + IB + EDS (Killed)",
+                "route": "Intramuscular/Subcutaneous",
+                "notes": "Pre-lay killed vaccine - CRITICAL"
+            },
+            {
+                "day": 126,
+                "age": "Week 18",
+                "vaccine": "Salmonella (if required)",
+                "route": "Intramuscular",
+                "notes": "For food safety compliance"
+            },
+            {
+                "day": 280,
+                "age": "Week 40",
+                "vaccine": "ND + IB (Killed) Booster",
+                "route": "Intramuscular",
+                "notes": "Mid-lay booster for extended production"
+            }
+        ],
+        "tips": [
+            "Keep detailed vaccination records",
+            "Never skip pre-lay killed vaccines",
+            "Adjust schedule based on local disease challenges",
+            "Get vaccines from reputable sources only",
+            "Train staff on proper vaccination techniques"
+        ]
+    },
+    "feed_requirements": {
+        "broiler": {
+            "phases": [
+                {
+                    "phase": "Pre-Starter",
+                    "age_days": "1-7",
+                    "protein": "22-23%",
+                    "energy_kcal": "3000",
+                    "intake_per_bird_g": "150-180",
+                    "notes": "Crumble form preferred"
+                },
+                {
+                    "phase": "Starter",
+                    "age_days": "8-21",
+                    "protein": "21-22%",
+                    "energy_kcal": "3100",
+                    "intake_per_bird_g": "700-900",
+                    "notes": "Can transition to pellet"
+                },
+                {
+                    "phase": "Grower",
+                    "age_days": "22-35",
+                    "protein": "19-20%",
+                    "energy_kcal": "3150",
+                    "intake_per_bird_g": "1800-2200",
+                    "notes": "Pellet form optimal"
+                },
+                {
+                    "phase": "Finisher",
+                    "age_days": "36-42+",
+                    "protein": "18-19%",
+                    "energy_kcal": "3200",
+                    "intake_per_bird_g": "800-1200",
+                    "notes": "Reduce if birds are overweight"
+                }
+            ],
+            "water_ratio": "Water consumption is typically 1.8-2x feed consumption",
+            "fcr_target": "1.5-1.8 (kg feed per kg weight gain)"
+        },
+        "layer": {
+            "phases": [
+                {
+                    "phase": "Chick Starter",
+                    "age_weeks": "0-6",
+                    "protein": "20-21%",
+                    "calcium": "1.0%",
+                    "intake_per_bird_g": "25-45/day",
+                    "notes": "High protein for growth"
+                },
+                {
+                    "phase": "Grower",
+                    "age_weeks": "7-12",
+                    "protein": "17-18%",
+                    "calcium": "1.0%",
+                    "intake_per_bird_g": "55-75/day",
+                    "notes": "Control weight gain"
+                },
+                {
+                    "phase": "Developer",
+                    "age_weeks": "13-17",
+                    "protein": "15-16%",
+                    "calcium": "1.2%",
+                    "intake_per_bird_g": "75-90/day",
+                    "notes": "Prepare for production"
+                },
+                {
+                    "phase": "Pre-Lay",
+                    "age_weeks": "18-20",
+                    "protein": "17-18%",
+                    "calcium": "2.5%",
+                    "intake_per_bird_g": "90-100/day",
+                    "notes": "Calcium buildup for eggs"
+                },
+                {
+                    "phase": "Layer Phase 1",
+                    "age_weeks": "21-45",
+                    "protein": "18-19%",
+                    "calcium": "4.0-4.5%",
+                    "intake_per_bird_g": "110-120/day",
+                    "notes": "Peak production phase"
+                },
+                {
+                    "phase": "Layer Phase 2",
+                    "age_weeks": "46-72+",
+                    "protein": "16-17%",
+                    "calcium": "4.5%",
+                    "intake_per_bird_g": "110-115/day",
+                    "notes": "Reduce protein, maintain calcium"
+                }
+            ],
+            "water_ratio": "250-300ml per bird per day in lay",
+            "egg_target": "300-320 eggs per hen housed in 72 weeks"
+        }
+    },
+    "biosecurity_checklist": {
+        "daily": [
+            {
+                "item": "Change footwear at farm entrance",
+                "critical": true
+            },
+            {
+                "item": "Wash hands before entering sheds",
+                "critical": true
+            },
+            {
+                "item": "Check for signs of illness in birds",
+                "critical": true
+            },
+            {
+                "item": "Remove dead birds promptly",
+                "critical": true
+            },
+            {
+                "item": "Check feed and water availability",
+                "critical": false
+            },
+            {
+                "item": "Record any abnormal observations",
+                "critical": false
+            }
+        ],
+        "weekly": [
+            {
+                "item": "Clean and disinfect footbaths",
+                "critical": true
+            },
+            {
+                "item": "Check and repair fencing",
+                "critical": false
+            },
+            {
+                "item": "Inspect for rodent activity",
+                "critical": true
+            },
+            {
+                "item": "Clean water lines/drinkers",
+                "critical": true
+            },
+            {
+                "item": "Check ventilation systems",
+                "critical": false
+            },
+            {
+                "item": "Review mortality records",
+                "critical": true
+            }
+        ],
+        "between_flocks": [
+            {
+                "item": "Complete cleanout of litter/manure",
+                "critical": true
+            },
+            {
+                "item": "Wash all surfaces with detergent",
+                "critical": true
+            },
+            {
+                "item": "Disinfect entire house",
+                "critical": true
+            },
+            {
+                "item": "Clean and disinfect all equipment",
+                "critical": true
+            },
+            {
+                "item": "Fumigation if disease occurred",
+                "critical": true
+            },
+            {
+                "item": "Maintain downtime (14+ days)",
+                "critical": true
+            },
+            {
+                "item": "Rodent and pest control",
+                "critical": true
+            },
+            {
+                "item": "Test water quality",
+                "critical": false
+            }
+        ],
+        "tips": [
+            "All-in-all-out is the gold standard",
+            "Limit visitors to essential personnel only",
+            "Provide farm-specific clothing and footwear",
+            "Keep complete records of all visits",
+            "Quarantine new birds for 2-3 weeks"
+        ]
+    },
+    "emergency_contacts": {
+        "india": {
+            "animal_husbandry": "State Animal Husbandry Department",
+            "disease_reporting": "State Veterinary Officer / District Veterinary Hospital",
+            "helplines": [
+                {
+                    "name": "Kisan Call Center",
+                    "number": "1800-180-1551",
+                    "hours": "24x7"
+                },
+                {
+                    "name": "Animal Helpline (varies by state)",
+                    "number": "1962",
+                    "hours": "24x7"
+                }
+            ],
+            "labs": [
+                "ICAR-IVRI Bareilly (Reference Lab)",
+                "Regional Disease Diagnostic Labs (RDDL)",
+                "State Veterinary Colleges"
+            ]
+        },
+        "general_guidance": [
+            "For sudden high mortality (>5% in a day), contact authorities immediately",
+            "Suspected Avian Influenza or Newcastle must be reported",
+            "Keep samples (dead birds) refrigerated for testing",
+            "Do not move birds if outbreak suspected"
+        ]
+    },
+    "heat_stress_alerts": {
+        "temperature_zones": [
+            {
+                "range": "18-24°C",
+                "zone": "Comfort Zone",
+                "color": "green",
+                "action": "No action needed"
+            },
+            {
+                "range": "25-29°C",
+                "zone": "Alert Zone",
+                "color": "yellow",
+                "action": "Increase ventilation, ensure water availability"
+            },
+            {
+                "range": "30-34°C",
+                "zone": "Danger Zone",
+                "color": "orange",
+                "action": "Use foggers/coolers, reduce stocking density"
+            },
+            {
+                "range": "35°C+",
+                "zone": "Emergency Zone",
+                "color": "red",
+                "action": "Emergency cooling, reduce feed, electrolytes in water"
+            }
+        ],
+        "prevention_tips": [
+            "Provide cool, clean water at all times",
+            "Add electrolytes and vitamin C during hot periods",
+            "Reduce feeding during hottest hours (10am-4pm)",
+            "Ensure adequate ventilation (0.5-1 cfm per bird)",
+            "Use foggers or evaporative cooling",
+            "Reduce stocking density in summer",
+            "Paint roof white to reflect heat",
+            "Avoid vaccination during heat waves"
+        ],
+        "symptoms": [
+            "Panting and open-mouth breathing",
+            "Wings held away from body",
+            "Reduced feed consumption",
+            "Increased water consumption",
+            "Drop in egg production (layers)",
+            "Reduced growth rate (broilers)",
+            "Sudden death in severe cases"
+        ]
+    }
+}
