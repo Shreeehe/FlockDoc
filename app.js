@@ -608,3 +608,98 @@ function showToast(message, type = 'info') {
     setTimeout(() => toast.remove(), 200);
   }, 3000);
 }
+
+// ══════════════════════════════════════
+//   VOICE INPUT (Speech-to-Text)
+// ══════════════════════════════════════
+
+let recognition = null;
+let isListening = false;
+
+function toggleVoiceInput() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    showToast('Voice input not supported in this browser', 'warning');
+    return;
+  }
+
+  if (isListening) {
+    stopListening();
+    return;
+  }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.interimResults = true;
+  recognition.continuous = false;
+  recognition.maxAlternatives = 1;
+
+  const input = document.getElementById('chatInput');
+  const micBtn = document.getElementById('micBtn');
+  const baseText = input.value;
+
+  recognition.onstart = () => {
+    isListening = true;
+    micBtn.classList.add('listening');
+    micBtn.title = 'Stop listening';
+    showToast('🎙️ Listening... speak now', 'info');
+  };
+
+  recognition.onresult = (event) => {
+    let finalTranscript = '';
+    let interimTranscript = '';
+
+    // Always iterate from 0 to capture all accumulated results
+    for (let i = 0; i < event.results.length; i++) {
+      const result = event.results[i];
+      if (result.isFinal) {
+        finalTranscript += result[0].transcript;
+      } else {
+        interimTranscript += result[0].transcript;
+      }
+    }
+
+    // Combine: existing text + all finals + current interim
+    const separator = baseText ? ' ' : '';
+    input.value = baseText + separator + finalTranscript + interimTranscript;
+
+    // Auto-resize textarea
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  };
+
+  recognition.onerror = (event) => {
+    if (event.error === 'no-speech') {
+      showToast('No speech detected. Try again.', 'warning');
+    } else if (event.error === 'not-allowed') {
+      showToast('Microphone access denied. Check browser permissions.', 'error');
+    } else if (event.error !== 'aborted') {
+      showToast(`Voice error: ${event.error}`, 'error');
+    }
+    stopListening();
+  };
+
+  recognition.onend = () => {
+    stopListening();
+  };
+
+  try {
+    recognition.start();
+  } catch (e) {
+    showToast('Could not start voice input', 'error');
+    stopListening();
+  }
+}
+
+function stopListening() {
+  if (recognition) {
+    try { recognition.stop(); } catch (_) { }
+    recognition = null;
+  }
+  isListening = false;
+  const micBtn = document.getElementById('micBtn');
+  if (micBtn) {
+    micBtn.classList.remove('listening');
+    micBtn.title = 'Voice input';
+  }
+}

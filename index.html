@@ -101,8 +101,10 @@
                 in droppings</button>
               <button class="suggestion-pill" onclick="sendQuickMessage('Sudden death in flock')">⚠️ Sudden
                 death</button>
-              <button class="suggestion-pill" onclick="sendQuickMessage('What vaccinations do broilers need?')">💉
-                Vaccinations</button>
+              <button class="suggestion-pill" onclick="sendQuickMessage('My birds have swollen head and eyes')">😷
+                Swollen head & eyes</button>
+              <button class="suggestion-pill" onclick="sendQuickMessage('Birds are not eating and look weak')">🥱 Not
+                eating / lethargic</button>
             </div>
           </div>
         </div>
@@ -113,6 +115,7 @@
               <textarea class="chat-input" id="chatInput" placeholder="Describe symptoms or ask a question..."
                 rows="1"></textarea>
             </div>
+            <button class="chat-mic-btn" id="micBtn" onclick="toggleVoiceInput()" title="Voice input">🎙️</button>
             <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send">➤</button>
           </div>
         </div>
