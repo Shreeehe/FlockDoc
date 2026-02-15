@@ -295,24 +295,25 @@ async function loadSymptoms() {
     const container = document.getElementById('symptomContainer');
     container.innerHTML = '';
 
-    if (data.categories) {
-      Object.entries(data.categories).forEach(([category, symptoms]) => {
-        const group = document.createElement('div');
-        group.className = 'symptom-group';
-        group.innerHTML = `<div class="symptom-group-label">${category}</div>`;
-        const pills = document.createElement('div');
-        pills.className = 'symptom-pills';
-        symptoms.forEach(symptom => {
-          const pill = document.createElement('button');
-          pill.className = 'symptom-pill';
-          pill.textContent = symptom;
-          pill.onclick = () => toggleSymptom(pill, symptom);
-          pills.appendChild(pill);
-        });
-        group.appendChild(pills);
-        container.appendChild(group);
+    // API returns: {respiratory: {name, symptoms: [{id, name, ...}]}, ...}
+    Object.entries(data).forEach(([key, cat]) => {
+      if (!cat.symptoms || !cat.symptoms.length) return;
+      const group = document.createElement('div');
+      group.className = 'symptom-group';
+      group.innerHTML = `<div class="symptom-group-label">${cat.name || key}</div>`;
+      const pills = document.createElement('div');
+      pills.className = 'symptom-pills';
+      cat.symptoms.forEach(s => {
+        const symptomName = s.name || s;
+        const pill = document.createElement('button');
+        pill.className = 'symptom-pill';
+        pill.textContent = symptomName;
+        pill.onclick = () => toggleSymptom(pill, symptomName);
+        pills.appendChild(pill);
       });
-    }
+      group.appendChild(pills);
+      container.appendChild(group);
+    });
   } catch (_) {
     document.getElementById('symptomContainer').innerHTML =
       '<p class="text-muted" style="font-size:13px;">Could not load symptoms. Is the server running?</p>';
