@@ -1,0 +1,222 @@
+{
+    "common_breeds": {
+        "broiler": [
+            {
+                "id": "cobb_500",
+                "name": "Cobb 500",
+                "origin": "USA",
+                "characteristics": "Fast growth, good FCR"
+            },
+            {
+                "id": "ross_308",
+                "name": "Ross 308",
+                "origin": "UK",
+                "characteristics": "Excellent growth rate"
+            },
+            {
+                "id": "arbor_acres",
+                "name": "Arbor Acres Plus",
+                "origin": "USA",
+                "characteristics": "Good meat yield"
+            },
+            {
+                "id": "hubbard",
+                "name": "Hubbard Classic",
+                "origin": "USA",
+                "characteristics": "Robust, adaptable"
+            },
+            {
+                "id": "vencobb",
+                "name": "Vencobb",
+                "origin": "India",
+                "characteristics": "Heat tolerant"
+            },
+            {
+                "id": "other_broiler",
+                "name": "Other/Unknown",
+                "origin": "Various",
+                "characteristics": ""
+            }
+        ],
+        "layer": [
+            {
+                "id": "lohmann_brown",
+                "name": "Lohmann Brown",
+                "origin": "Germany",
+                "characteristics": "300+ eggs/year"
+            },
+            {
+                "id": "isa_brown",
+                "name": "ISA Brown",
+                "origin": "France",
+                "characteristics": "High production"
+            },
+            {
+                "id": "hy_line_brown",
+                "name": "Hy-Line Brown",
+                "origin": "USA",
+                "characteristics": "Excellent layer"
+            },
+            {
+                "id": "bovans_white",
+                "name": "Bovans White",
+                "origin": "Netherlands",
+                "characteristics": "White egg layer"
+            },
+            {
+                "id": "bv_300",
+                "name": "BV-300",
+                "origin": "India",
+                "characteristics": "Heat tolerant layer"
+            },
+            {
+                "id": "kadaknath",
+                "name": "Kadaknath",
+                "origin": "India",
+                "characteristics": "Native, black meat"
+            },
+            {
+                "id": "aseel",
+                "name": "Aseel",
+                "origin": "India",
+                "characteristics": "Native, hardy"
+            },
+            {
+                "id": "other_layer",
+                "name": "Other/Unknown",
+                "origin": "Various",
+                "characteristics": ""
+            }
+        ]
+    },
+    "age_stages": {
+        "broiler": [
+            {
+                "stage": "chick",
+                "age_days": "0-7",
+                "critical_issues": [
+                    "omphalitis",
+                    "aspergillosis",
+                    "dehydration"
+                ]
+            },
+            {
+                "stage": "starter",
+                "age_days": "8-21",
+                "critical_issues": [
+                    "coccidiosis",
+                    "IBD",
+                    "respiratory"
+                ]
+            },
+            {
+                "stage": "grower",
+                "age_days": "22-35",
+                "critical_issues": [
+                    "coccidiosis",
+                    "E. coli",
+                    "leg problems"
+                ]
+            },
+            {
+                "stage": "finisher",
+                "age_days": "36-42+",
+                "critical_issues": [
+                    "ascites",
+                    "sudden death",
+                    "leg problems"
+                ]
+            }
+        ],
+        "layer": [
+            {
+                "stage": "chick",
+                "age_days": "0-42",
+                "critical_issues": [
+                    "Marek's",
+                    "coccidiosis",
+                    "aspergillosis"
+                ]
+            },
+            {
+                "stage": "grower",
+                "age_days": "43-112",
+                "critical_issues": [
+                    "vaccinations",
+                    "uniformity",
+                    "parasites"
+                ]
+            },
+            {
+                "stage": "pre-lay",
+                "age_days": "113-140",
+                "critical_issues": [
+                    "lighting",
+                    "nutrition transition"
+                ]
+            },
+            {
+                "stage": "early_lay",
+                "age_days": "141-280",
+                "critical_issues": [
+                    "cage fatigue",
+                    "egg peritonitis"
+                ]
+            },
+            {
+                "stage": "peak_lay",
+                "age_days": "181-350",
+                "critical_issues": [
+                    "fatty liver",
+                    "calcium",
+                    "EDS"
+                ]
+            },
+            {
+                "stage": "late_lay",
+                "age_days": "350+",
+                "critical_issues": [
+                    "end of lay issues",
+                    "molting"
+                ]
+            }
+        ]
+    },
+    "quick_facts": {
+        "general": [
+            "Chickens have a body temperature of 40-42°C (104-107°F)",
+            "A broiler reaches market weight of 2kg in about 35-42 days",
+            "Layers begin producing eggs at around 18-20 weeks of age",
+            "Chickens drink approximately twice as much water as they eat feed",
+            "Good biosecurity can prevent 90% of poultry diseases"
+        ],
+        "broiler": [
+            "Modern broilers gain about 50-60 grams per day",
+            "Feed conversion ratio (FCR) is typically 1.5-1.8 for broilers",
+            "Optimal brooding temperature is 32-35°C in first week",
+            "Lighting program affects growth and leg health",
+            "Ascites is more common in fast-growing broilers at high altitudes"
+        ],
+        "layer": [
+            "Commercial layers can produce 300+ eggs per year",
+            "Egg production typically peaks at 90-95% around 28-30 weeks",
+            "Layers need 14-16 hours of light for optimal production",
+            "Calcium requirement increases to 4% at onset of lay",
+            "Molting can be induced to extend production life"
+        ]
+    },
+    "emergency_signs": [
+        "Sudden high mortality (>5% in one day)",
+        "Severe respiratory distress in entire flock",
+        "Neurological signs (paralysis, twisted neck) spreading",
+        "Blue/purple discoloration of comb and wattles",
+        "Complete cessation of eating and drinking"
+    ],
+    "when_to_call_vet": [
+        "Mortality exceeds normal rates",
+        "Multiple symptoms appearing suddenly",
+        "Disease not responding to treatment",
+        "Suspected notifiable disease (AI, Newcastle)",
+        "Unusual or unknown symptoms"
+    ]
+}

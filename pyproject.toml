@@ -1,0 +1,19 @@
+[project]
+name = "poultry-disease-chatbot"
+version = "1.0.0"
+description = "AI-powered poultry disease prediction chatbot for broiler and layer chickens"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "python-multipart>=0.0.6",
+    "pillow>=10.2.0",
+    "google-genai>=1.0.0",
+    "pydantic>=2.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+]

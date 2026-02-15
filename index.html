@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="AI-powered poultry disease diagnosis, image analysis, and health management.">
+  <meta name="theme-color" content="#4318FF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>FlockDoc</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════ SPLASH INTRO ═══════════════ -->
+  <div class="splash" id="splashScreen">
+    <div class="splash-glow"></div>
+    <div class="splash-glow splash-glow-2"></div>
+    <div class="splash-content">
+      <div class="splash-icon">
+        <span>🐔</span>
+        <div class="splash-ring"></div>
+        <div class="splash-ring splash-ring-2"></div>
+        <div class="splash-ring splash-ring-3"></div>
+      </div>
+      <h1 class="splash-title">FlockDoc</h1>
+      <p class="splash-tagline">AI-Powered Poultry Health</p>
+      <div class="splash-loader">
+        <div class="splash-loader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ TOP NAVBAR ═══════════════ -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <span class="brand-icon">🐔</span>
+      FlockDoc
+    </div>
+    <div class="navbar-spacer"></div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </nav>
+
+  <!-- ═══════════════ LEFT SIDEBAR (desktop only) ═══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section-label">AI Tools</div>
+    <ul class="sidebar-nav">
+      <li>
+        <button class="sidebar-nav-item active" data-tab="chat">
+          <span class="nav-icon">💬</span> Chat
+        </button>
+      </li>
+      <li>
+        <button class="sidebar-nav-item" data-tab="predict">
+          <span class="nav-icon">🔬</span> Disease Predict
+        </button>
+      </li>
+    </ul>
+
+    <!-- Status panel -->
+    <div class="sidebar-stats">
+      <div class="sidebar-stats-card">
+        <div class="sidebar-stat-row">
+          <span class="label">API Status</span>
+          <span class="value" id="apiStatusText">Checking...</span>
+        </div>
+        <div class="sidebar-stat-bar">
+          <div class="fill" id="apiStatusBar" style="width: 0%"></div>
+        </div>
+        <div class="sidebar-stat-row">
+          <span class="label">Messages</span>
+          <span class="value" id="sessionCount">0</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+  <main class="main" id="mainContent">
+
+    <!-- CHAT -->
+    <div class="tab-panel active" id="panel-chat">
+      <div class="chat-panel">
+        <div class="chat-messages" id="chatMessages">
+          <div class="welcome-center" id="chatWelcome">
+            <h1>🐔 FlockDoc</h1>
+            <p>Ask about poultry diseases, describe symptoms, or get AI-powered health guidance for your flock.</p>
+            <div class="welcome-actions">
+              <button class="btn btn-primary" onclick="sendQuickMessage('Hello, I need help with my chickens')">💬 Start
+                Chat</button>
+              <button class="btn btn-secondary" onclick="switchTab('predict')">🔬 Run Prediction</button>
+            </div>
+            <div class="chat-suggestions" style="margin-top:18px;">
+              <button class="suggestion-pill"
+                onclick="sendQuickMessage('My chickens are sneezing and have watery eyes')">🤧 Sneezing & watery
+                eyes</button>
+              <button class="suggestion-pill" onclick="sendQuickMessage('I found blood in chicken droppings')">💩 Blood
+                in droppings</button>
+              <button class="suggestion-pill" onclick="sendQuickMessage('Sudden death in flock')">⚠️ Sudden
+                death</button>
+              <button class="suggestion-pill" onclick="sendQuickMessage('What vaccinations do broilers need?')">💉
+                Vaccinations</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <div class="chat-input-row">
+            <div class="chat-input-wrapper">
+              <textarea class="chat-input" id="chatInput" placeholder="Describe symptoms or ask a question..."
+                rows="1"></textarea>
+            </div>
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREDICT (with image upload built in) -->
+    <div class="tab-panel" id="panel-predict">
+      <div class="predict-panel">
+        <div class="page-header" style="padding:0 0 14px;">
+          <button class="back-btn" onclick="switchTab('chat')">← Chat</button>
+          <div>
+            <h1 class="page-title">Disease Prediction</h1>
+            <p class="page-subtitle">Enter bird details, symptoms & droppings image for AI diagnosis</p>
+          </div>
+        </div>
+
+        <div class="predict-grid">
+          <div>
+            <!-- Bird Info -->
+            <div class="card">
+              <div class="card-header">
+                <h3>🐓 Bird Info</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Bird Type</label>
+                  <select class="form-select" id="birdType">
+                    <option value="broiler">Broiler</option>
+                    <option value="layer">Layer</option>
+                    <option value="broiler_breeder">Broiler Breeder</option>
+                    <option value="layer_breeder">Layer Breeder</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Breed</label>
+                  <select class="form-select" id="breedSelect">
+                    <option value="">Select breed...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Age (days)</label>
+                  <input type="number" class="form-input" id="ageDays" placeholder="e.g. 21" min="1"
+                    inputmode="numeric">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mortality Rate (%)</label>
+                  <input type="number" class="form-input" id="mortalityRate" placeholder="e.g. 5" min="0" max="100"
+                    step="0.1" inputmode="decimal">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Flock Size</label>
+                  <input type="number" class="form-input" id="flockSize" placeholder="e.g. 500" min="1"
+                    inputmode="numeric">
+                </div>
+              </div>
+            </div>
+
+            <!-- Droppings Image (optional) -->
+            <div class="card mt-2">
+              <div class="card-header">
+                <h3>📸 Droppings Image <span class="text-muted"
+                    style="font-weight:400;font-size:12px;">(optional)</span></h3>
+              </div>
+              <div class="card-body">
+                <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imageInput').click()">
+                  <input type="file" id="imageInput" accept="image/*" capture="environment" hidden>
+                  <div class="upload-icon">📁</div>
+                  <div class="upload-text">Tap to upload or take photo</div>
+                  <div class="upload-hint">Upload droppings or symptom image for better diagnosis</div>
+                </div>
+                <div class="upload-preview hidden" id="uploadPreview">
+                  <img id="previewImg" src="" alt="Preview">
+                  <button class="remove-btn" onclick="removeImage()" title="Remove">✕</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Symptoms (collapsible, starts collapsed) -->
+            <div class="card mt-2" id="symptomsCard">
+              <div class="card-header" onclick="toggleSymptomsCard()" style="cursor:pointer;user-select:none;">
+                <h3>🩺 Symptoms</h3>
+                <span class="collapse-arrow" id="symptomsArrow">▶</span>
+              </div>
+              <div class="card-body hidden" id="symptomContainer">
+                <p class="text-muted" style="font-size:13px;">Loading symptoms...</p>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button class="btn btn-primary btn-lg mt-2" id="predictBtn" onclick="submitPrediction()"
+              style="width:100%;">
+              🔬 Run Prediction
+            </button>
+          </div>
+
+          <!-- Results -->
+          <div id="predictionResults">
+            <div class="predict-result-placeholder">
+              <span class="icon">🔬</span>
+              <h3>No results yet</h3>
+              <p>Fill in bird details, select symptoms, and click "Run Prediction" for an AI diagnosis.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════ MOBILE BOTTOM NAV ═══════════════ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-item active" data-tab="chat">
+      <span class="nav-icon">💬</span> Chat
+    </button>
+    <button class="mobile-nav-item" data-tab="predict">
+      <span class="nav-icon">🔬</span> Predict
+    </button>
+  </nav>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="/app.js"></script>
+</body>
+
+</html>
