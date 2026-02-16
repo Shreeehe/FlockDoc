@@ -1,0 +1,431 @@
+
+================================================================================
+                     FLOCKDOC - SYSTEM DESIGN DOCUMENT
+              AI-Powered Poultry Disease Diagnosis Application
+================================================================================
+
+
+================================================================================
+1. HIGH-LEVEL DESIGN (HLD)
+================================================================================
+
+1.1 SYSTEM OVERVIEW
+-------------------
+FlockDoc is a web-based AI poultry health assistant that helps farmers
+diagnose diseases, analyze droppings images, and get treatment plans.
+
+  Tech Stack:
+  - Frontend : HTML + CSS + Vanilla JS (mobile-first, dark/light theme)
+  - Backend  : Python FastAPI
+  - AI       : Google Gemini 2.5 Flash (chat + vision) / Ollama (local)
+  - Data     : JSON knowledge base (diseases, symptoms, treatments)
+
+
+1.2 HIGH-LEVEL ARCHITECTURE
+----------------------------
+
+  +-----------------------------------------------------+
+  |                     USER (Browser)                   |
+  |   Mobile / Desktop — Chat, Predict, Image Upload     |
+  +------------------------+----------------------------+
+                           |
+                     HTTP Requests
+                           |
+  +------------------------v----------------------------+
+  |                  FastAPI Server                      |
+  |                  (backend/main.py)                   |
+  |                                                      |
+  |   Routes:                                            |
+  |   GET  /           → Serve index.html                |
+  |   GET  /style.css  → Serve CSS                       |
+  |   GET  /app.js     → Serve JS                        |
+  |   POST /api/chat   → AI Chat                         |
+  |   POST /api/predict → Disease Prediction             |
+  |   POST /api/analyze-image → Droppings Analysis       |
+  |   GET  /api/symptoms → Symptom List                  |
+  |   GET  /api/breeds/{type} → Breed List               |
+  |   GET  /api/diseases/{type} → Disease Reference      |
+  |   GET  /api/facts  → Random Facts                    |
+  |   GET  /api/tools  → Vaccination/Feed/Biosecurity    |
+  +------+----------+----------+-----------+-------------+
+         |          |          |           |
+         v          v          v           v
+  +-----------+ +---------+ +---------+ +----------+
+  | Chatbot   | |Disease  | |Image    | | JSON     |
+  | (Gemini/  | |Predictor| |Analyzer | | Knowledge|
+  |  Ollama)  | |(Rules)  | |(Vision) | | Base     |
+  +-----------+ +---------+ +---------+ +----------+
+
+
+1.3 HIGH-LEVEL DATA FLOW
+--------------------------
+
+  ┌──────────────────────────────────────────────────────────────┐
+  │                     USER INTERACTION                         │
+  │                                                              │
+  │   Chat Tab               Predict Tab                         │
+  │   --------               -----------                         │
+  │   Type/speak symptoms    Select bird info + symptoms         │
+  │         │                Upload droppings image (optional)    │
+  │         │                         │                          │
+  │         v                         v                          │
+  │   POST /api/chat          POST /api/predict                  │
+  │         │                    + POST /api/analyze-image       │
+  │         │                         │                          │
+  │         v                         v                          │
+  │   Gemini AI generates     Rule-based matching against        │
+  │   vet-style response      disease database + Gemini          │
+  │         │                 Vision for image                   │
+  │         │                         │                          │
+  │         v                         v                          │
+  │   Structured response     Disease cards + treatment          │
+  │   with [SECTIONS]         + severity + vet alert             │
+  └──────────────────────────────────────────────────────────────┘
+
+
+1.4 COMPONENT SUMMARY TABLE
+-----------------------------
+
+  Component            File                    Purpose
+  ----------           ----                    -------
+  API Server           backend/main.py         Routes, CORS, static files
+  AI Chatbot           backend/chatbot.py      Gemini/Ollama chat with prompts
+  Disease Predictor    backend/disease_        Rule-based disease matching,
+                       predictor.py            scoring, treatment lookup
+  Image Analyzer       backend/image_          Gemini Vision for droppings
+                       analyzer.py             photo analysis
+  Frontend HTML        index.html              Chat UI, Predict form, nav
+  Frontend CSS         style.css               Dark/light theme, animations
+  Frontend JS          app.js                  API calls, DOM, voice input
+  Disease Data         data/diseases.json      30+ diseases with symptoms
+  Symptom Data         data/symptoms.json      Categorized symptom list
+  Treatment Data       data/treatments.json    Treatment protocols
+  Reference Data       data/reference.json     Poultry facts, breed info
+  Tools Data           data/tools.json         Vaccination, feed, biosecurity
+
+
+================================================================================
+2. LOW-LEVEL DESIGN (LLD)
+================================================================================
+
+2.1 CHAT FLOW (Detailed)
+--------------------------
+
+  User types/speaks message
+          │
+          v
+  ┌───────────────────┐
+  │ app.js:            │
+  │ sendChatMessage()  │
+  │ or toggleVoice()   │
+  └────────┬──────────┘
+           │
+           v
+  ┌────────────────────────────────────────┐
+  │ POST /api/chat                         │
+  │ Body: {message, bird_type, history[]}  │
+  └────────┬───────────────────────────────┘
+           │
+           v
+  ┌────────────────────────────────────────┐
+  │ main.py → chat()                       │
+  │ Calls chatbot.process_message()        │
+  └────────┬───────────────────────────────┘
+           │
+           v
+  ┌────────────────────────────────────────┐
+  │ chatbot.py → process_message()         │
+  │                                        │
+  │  1. Is it a greeting? ──yes──> Return  │
+  │     short greeting response            │
+  │                │                       │
+  │               no                       │
+  │                │                       │
+  │  2. Build context string               │
+  │     (user msg + disease hints)         │
+  │                │                       │
+  │  3. Build chat history from            │
+  │     last 6 messages                    │
+  │                │                       │
+  │  4. Send system_prompt + context       │
+  │     to Gemini 2.5 Flash                │
+  │                │                       │
+  │  5. Parse response:                    │
+  │     - Detect response type             │
+  │     - Generate suggestion pills        │
+  │     - Detect disease mentions          │
+  │                │                       │
+  │  6. Return {response, suggestions,     │
+  │             disease_detected}          │
+  └────────┬───────────────────────────────┘
+           │
+           v
+  ┌────────────────────────────────────────┐
+  │ app.js → appendChatMessage()           │
+  │                                        │
+  │  1. parseAIResponse(text)              │
+  │     Split by [SECTION] headers         │
+  │     Map to styled cards:               │
+  │       [DIAGNOSIS] → 🩺 card            │
+  │       [TREATMENT] → 💊 card            │
+  │       [WARNING]   → ⚠️ card            │
+  │       [QUESTION]  → ❓ card            │
+  │                                        │
+  │  2. Render suggestion pills            │
+  │  3. Scroll to bottom                   │
+  └────────────────────────────────────────┘
+
+
+2.2 DISEASE PREDICTION FLOW (Detailed)
+----------------------------------------
+
+  User fills form:
+    Bird Type, Breed, Age, Flock Size,
+    Mortality Rate, Symptoms[], Image (optional)
+          │
+          v
+  ┌────────────────────────────────────────┐
+  │ app.js → submitPrediction()            │
+  │ Validate: at least 1 symptom selected  │
+  └────────┬───────────────────────────────┘
+           │
+           ├──────────────────────────────────────────┐
+           │                                          │
+           v                                          v
+  ┌─────────────────────┐              ┌──────────────────────────┐
+  │ POST /api/predict    │              │ POST /api/analyze-image  │
+  │ {bird_type, age,     │              │ (only if image uploaded) │
+  │  breed, symptoms[],  │              │ FormData: image file +   │
+  │  mortality, flock}   │              │ bird_type                │
+  └────────┬────────────┘              └────────┬─────────────────┘
+           │                                     │
+           v                                     v
+  ┌─────────────────────┐              ┌──────────────────────────┐
+  │ disease_predictor.py │              │ image_analyzer.py        │
+  │ predict()            │              │ analyze()                │
+  │                      │              │                          │
+  │ Step 1: Get diseases │              │ 1. Resize image to       │
+  │  for bird_type       │              │    512×512               │
+  │  (broiler/layer/     │              │ 2. Send to Gemini        │
+  │   breeder)           │              │    Vision with prompt    │
+  │                      │              │ 3. Parse response:       │
+  │ Step 2: Score each   │              │    - droppings_type      │
+  │  disease:            │              │    - color_analysis      │
+  │  - Match input       │              │    - health_indicators   │
+  │    symptoms to       │              │    - possible_conditions │
+  │    disease symptoms  │              │    - severity            │
+  │  - Calculate %       │              │    - recommendations     │
+  │  - Age bonus if      │              │                          │
+  │    age-appropriate   │              │ 4. Return structured     │
+  │                      │              │    analysis              │
+  │ Step 3: Sort by      │              └────────┬─────────────────┘
+  │  match_score desc    │                       │
+  │  Take top 5          │                       │
+  │                      │                       │
+  │ Step 4: Calculate    │                       │
+  │  overall severity    │                       │
+  │  (Low/Moderate/      │                       │
+  │   High/Critical)     │                       │
+  │                      │                       │
+  │ Step 5: Get          │                       │
+  │  treatment plan      │                       │
+  │  from treatments.json│                       │
+  │                      │                       │
+  │ Step 6: Check if     │                       │
+  │  vet needed          │                       │
+  │  (mortality>5%,      │                       │
+  │   critical severity) │                       │
+  │                      │                       │
+  │ Return:              │                       │
+  │  {diseases[],        │                       │
+  │   severity,          │                       │
+  │   treatment,         │                       │
+  │   prevention[],      │                       │
+  │   facts[],           │                       │
+  │   when_to_call_vet}  │                       │
+  └────────┬─────────────┘                       │
+           │                                     │
+           └──────────────┬──────────────────────┘
+                          │
+                          v
+  ┌────────────────────────────────────────┐
+  │ app.js → renderPredictionResults()     │
+  │                                        │
+  │  Renders:                              │
+  │  - Severity strip (color-coded)        │
+  │  - Disease cards with match %          │
+  │  - Matched symptoms tags               │
+  │  - Treatment card                      │
+  │  - Prevention tips                     │
+  │  - Vet alert banner                    │
+  │  - Image analysis (if uploaded)        │
+  └────────────────────────────────────────┘
+
+
+2.3 VOICE INPUT FLOW
+-----------------------
+
+  User taps 🎙️ mic button
+          │
+          v
+  ┌────────────────────────────────────────┐
+  │ app.js → toggleVoiceInput()            │
+  │                                        │
+  │ 1. Check browser support               │
+  │    (SpeechRecognition API)             │
+  │                │                       │
+  │ 2. Create SpeechRecognition instance   │
+  │    lang: en-US, interimResults: true   │
+  │                │                       │
+  │ 3. onstart → mic button turns red      │
+  │              pulse animation           │
+  │                │                       │
+  │ 4. onresult → accumulate transcript    │
+  │    Display in textarea in real-time    │
+  │                │                       │
+  │ 5. onend → stop listening              │
+  │    mic button returns to normal        │
+  │                │                       │
+  │ 6. User can tap Send or mic again      │
+  └────────────────────────────────────────┘
+
+
+2.4 THEME SYSTEM
+-----------------
+
+  Page Load
+      │
+      v
+  ┌──────────────────────────┐
+  │ Check localStorage       │
+  │ for saved theme           │
+  │      │                   │
+  │      ├─ found? → use it  │
+  │      │                   │
+  │      └─ not found?       │
+  │         Check OS pref    │
+  │         (prefers-color-  │
+  │          scheme: dark)   │
+  │              │           │
+  │              v           │
+  │  Set data-theme attr     │
+  │  on <html> element       │
+  │              │           │
+  │  CSS uses:               │
+  │  [data-theme="dark"]     │
+  │  for all dark overrides  │
+  └──────────────────────────┘
+
+
+2.5 DISEASE SCORING ALGORITHM
+-------------------------------
+
+  For each disease in database:
+
+  1. SYMPTOM MATCHING
+     matched = intersection(user_symptoms, disease_symptoms)
+     match_ratio = len(matched) / len(disease_symptoms)
+     base_score = match_ratio × 100
+
+  2. AGE ADJUSTMENT
+     if disease.age_range matches bird age:
+       score += 10 (age bonus)
+
+  3. RANKING
+     Sort all diseases by score DESC
+     Return top 5
+
+  4. SEVERITY CALCULATION
+     if top_score >= 70 AND mortality > 5%  → "Critical"
+     if top_score >= 70 OR  mortality > 3%  → "High"
+     if top_score >= 40                     → "Moderate"
+     else                                   → "Low"
+
+
+2.6 FILE STRUCTURE
+-------------------
+
+  FlockDoc/
+  ├── index.html              # Main HTML (SPA — chat + predict tabs)
+  ├── style.css               # Full CSS (2200+ lines, dark/light)
+  ├── app.js                  # Frontend logic (700+ lines)
+  ├── .env                    # API keys (git-ignored)
+  ├── .env.example            # Template for env vars
+  ├── .gitignore              # Git ignore rules
+  ├── requirements.txt        # Python dependencies
+  ├── pyproject.toml          # Project metadata
+  ├── README.md               # Project readme
+  ├── LICENSE                 # License file
+  │
+  ├── backend/
+  │   ├── __init__.py         # Package init
+  │   ├── main.py             # FastAPI app, routes, CORS
+  │   ├── chatbot.py          # Gemini + Ollama chat classes
+  │   ├── disease_predictor.py# Rule-based prediction engine
+  │   └── image_analyzer.py   # Gemini Vision image analysis
+  │
+  └── data/
+      ├── diseases.json       # 30+ diseases (broiler/layer/nutritional)
+      ├── symptoms.json       # Categorized symptoms for UI
+      ├── treatments.json     # Treatment protocols by disease
+      ├── reference.json      # Facts, breeds, general info
+      └── tools.json          # Vaccination, feed, biosecurity data
+
+
+2.7 API ENDPOINTS TABLE
+------------------------
+
+  Method  Endpoint              Input                    Output
+  ------  --------              -----                    ------
+  GET     /                     —                        index.html
+  GET     /style.css            —                        CSS file
+  GET     /app.js               —                        JS file
+  GET     /health               —                        {status: "healthy"}
+  POST    /api/chat             {message, bird_type,     {response, suggestions,
+                                 conversation_history}    disease_detected}
+  POST    /api/predict          {bird_type, age_days,    {diseases[], severity,
+                                 breed, symptoms[],       treatment, prevention[],
+                                 mortality_rate,           facts[], when_to_call_vet,
+                                 flock_size}               confidence}
+  POST    /api/analyze-image    FormData(image,          {droppings_type,
+                                 bird_type)               color_analysis,
+                                                          health_indicators[],
+                                                          possible_conditions[],
+                                                          severity,
+                                                          recommendations[]}
+  GET     /api/symptoms         —                        {category: {name, symptoms[]}}
+  GET     /api/breeds/{type}    bird_type                {breeds: [...]}
+  GET     /api/diseases/{type}  bird_type                {diseases: [...]}
+  GET     /api/facts            —                        {facts: [...]}
+  GET     /api/tools            —                        {vaccination, feed, ...}
+
+
+2.8 ENVIRONMENT VARIABLES
+--------------------------
+
+  Variable          Default     Description
+  --------          -------     -----------
+  GOOGLE_API_KEY    —           Gemini API key (required for gemini mode)
+  GEMINI_API_KEY    —           Alias for above
+  AI_PROVIDER       gemini      "gemini" or "ollama"
+  OLLAMA_MODEL      llama3.2:3b Local model name (if using ollama)
+
+
+================================================================================
+3. DEPLOYMENT
+================================================================================
+
+  Platform: Render.com (Web Service)
+
+  Build Command:   pip install -r requirements.txt
+  Start Command:   uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+
+  Environment Variables set in Render dashboard:
+    GOOGLE_API_KEY = <your-key>
+    AI_PROVIDER    = gemini
+
+  Auto-deploys on push to main branch.
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================

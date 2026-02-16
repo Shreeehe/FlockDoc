@@ -39,6 +39,21 @@ class DiseasePredictor:
         Predict disease based on input parameters
         Returns comprehensive diagnosis with treatment
         """
+        # ── LOW-SYMPTOM GUARD ──
+        if len(symptoms) < 2:
+            return {
+                "diseases": [],
+                "severity": "low",
+                "treatment": None,
+                "deficiencies": None,
+                "facts": self.get_random_facts(),
+                "prevention": [],
+                "when_to_call_vet": False,
+                "confidence": 0.0,
+                "low_confidence": True,
+                "low_confidence_message": "Please select at least 2 symptoms for a reliable diagnosis. The more symptoms you provide, the more accurate the prediction."
+            }
+
         # Get all applicable diseases
         all_diseases = self._get_applicable_diseases(bird_type)
         
@@ -76,14 +91,29 @@ class DiseasePredictor:
                 if disease_data.get("deficiency_related"):
                     deficiencies.extend(disease_data.get("deficiency", []))
         
+        # Calculate confidence
+        confidence = self._calculate_confidence(diseases, symptoms)
+        
+        # ── CONFIDENCE THRESHOLD ──
+        if not diseases or confidence < 0.25:
+            return {
+                "diseases": diseases,
+                "severity": "low",
+                "treatment": None,
+                "deficiencies": None,
+                "facts": self.get_random_facts(),
+                "prevention": [],
+                "when_to_call_vet": mortality_rate > 5,
+                "confidence": confidence,
+                "low_confidence": True,
+                "low_confidence_message": "Confidence is too low for a reliable diagnosis. Try selecting more specific symptoms or adding more details."
+            }
+        
         # Determine overall severity
         severity = self._calculate_severity(diseases, mortality_rate, len(symptoms))
         
         # Get treatment recommendations
         treatment = self._get_treatment_recommendations(diseases, severity)
-        
-        # Calculate confidence
-        confidence = self._calculate_confidence(diseases, symptoms)
         
         # Determine if vet is needed
         when_to_call_vet = self._should_call_vet(severity, mortality_rate, diseases)
@@ -93,10 +123,11 @@ class DiseasePredictor:
             "severity": severity,
             "treatment": treatment,
             "deficiencies": list(set(deficiencies)) if deficiencies else None,
-            "facts": list(set(all_facts))[:5],  # Top 5 unique facts
-            "prevention": list(set(all_prevention))[:5],  # Top 5 prevention tips
+            "facts": list(set(all_facts))[:5],
+            "prevention": list(set(all_prevention))[:5],
             "when_to_call_vet": when_to_call_vet,
-            "confidence": confidence
+            "confidence": confidence,
+            "low_confidence": False
         }
     
     def _get_applicable_diseases(self, bird_type: str) -> List[dict]:
@@ -124,7 +155,7 @@ class DiseasePredictor:
         age_days: int,
         bird_type: str
     ) -> Dict[str, dict]:
-        """Score each disease based on symptom match"""
+        """Score each disease based on symptom match with improved keyword matching"""
         scores = {}
         symptom_mapping = self.symptoms.get("disease_symptom_mapping", {})
         
@@ -132,12 +163,25 @@ class DiseasePredictor:
             disease_id = disease["id"]
             disease_symptoms = symptom_mapping.get(disease_id, disease.get("symptoms", []))
             
-            # Calculate symptom match score
+            # Calculate symptom match score with keyword-level matching
             matched = []
             for symptom in input_symptoms:
-                symptom_lower = symptom.lower().replace(" ", "_")
+                symptom_lower = symptom.lower().strip()
+                symptom_words = set(symptom_lower.replace("_", " ").split())
+                
                 for ds in disease_symptoms:
-                    if symptom_lower in ds.lower() or ds.lower() in symptom_lower:
+                    ds_lower = ds.lower()
+                    ds_words = set(ds_lower.replace("_", " ").split())
+                    
+                    # Exact or substring match
+                    if symptom_lower in ds_lower or ds_lower in symptom_lower:
+                        matched.append(symptom)
+                        break
+                    # Keyword overlap (at least 1 meaningful word matches)
+                    common = symptom_words & ds_words
+                    # Filter out stop words
+                    meaningful = common - {"in", "of", "the", "and", "or", "a", "an", "to"}
+                    if meaningful and len(meaningful) >= 1:
                         matched.append(symptom)
                         break
             
@@ -145,12 +189,18 @@ class DiseasePredictor:
                 match_ratio = len(matched) / len(disease_symptoms)
                 input_coverage = len(matched) / len(input_symptoms) if input_symptoms else 0
                 
-                # Combined score
-                score = (match_ratio * 0.6) + (input_coverage * 0.4)
+                # Combined score — weight input_coverage higher so matching
+                # most of the user's symptoms is rewarded
+                score = (match_ratio * 0.5) + (input_coverage * 0.5)
                 
                 # Age adjustment
                 if self._is_age_appropriate(disease, age_days, bird_type):
-                    score *= 1.2
+                    score *= 1.15
+                
+                # Bonus for nutritional diseases when symptoms are non-specific
+                # (weakness, poor growth, lameness etc.)
+                if disease.get("deficiency_related") and len(matched) >= 2:
+                    score *= 1.1
                 
                 scores[disease_id] = {
                     "score": min(score, 1.0),
@@ -184,18 +234,53 @@ class DiseasePredictor:
         mortality_rate: float,
         symptom_count: int
     ) -> str:
-        """Calculate overall severity"""
+        """Calculate severity using weighted scoring from match quality + mortality"""
         if not diseases:
             return "low"
         
-        # Check disease severities
-        severities = [d.get("severity", "moderate") for d in diseases]
+        # Severity weight map
+        sev_weights = {"critical": 4, "high": 3, "moderate": 2, "low": 1}
         
-        if "critical" in severities or mortality_rate > 10:
+        # Top disease match score (0-100)
+        top_match = diseases[0].get("match_score", 0)
+        top_sev = diseases[0].get("severity", "moderate")
+        
+        # Base severity from disease label
+        base = sev_weights.get(top_sev, 2)
+        
+        # Mortality factor (0-4 scale)
+        if mortality_rate > 10:
+            mort_factor = 4
+        elif mortality_rate > 5:
+            mort_factor = 3
+        elif mortality_rate > 2:
+            mort_factor = 2
+        elif mortality_rate > 0:
+            mort_factor = 1
+        else:
+            mort_factor = 0
+        
+        # Match quality factor — low match score should reduce severity
+        if top_match >= 60:
+            match_factor = 1.0
+        elif top_match >= 40:
+            match_factor = 0.8
+        elif top_match >= 20:
+            match_factor = 0.6
+        else:
+            match_factor = 0.3
+        
+        # Symptom count bonus
+        symptom_bonus = min(symptom_count / 6, 1.0)  # caps at 6 symptoms
+        
+        # Final weighted score (0-4 scale)
+        final = (base * 0.35 + mort_factor * 0.35 + symptom_bonus * base * 0.3) * match_factor
+        
+        if final >= 3.2:
             return "critical"
-        elif "high" in severities or mortality_rate > 5:
+        elif final >= 2.2:
             return "high"
-        elif "moderate" in severities or symptom_count >= 4:
+        elif final >= 1.2:
             return "moderate"
         else:
             return "low"
@@ -246,16 +331,27 @@ class DiseasePredictor:
         return treatment_info
     
     def _calculate_confidence(self, diseases: List[dict], symptoms: List[str]) -> float:
-        """Calculate prediction confidence"""
+        """Calculate prediction confidence with stricter thresholds"""
         if not diseases or not symptoms:
             return 0.0
         
-        # Base confidence on match score and symptom coverage
         top_score = diseases[0].get("match_score", 0) / 100
-        symptom_factor = min(len(symptoms) / 5, 1.0)  # More symptoms = more confident
+        matched_count = len(diseases[0].get("matched_symptoms", []))
         
-        confidence = (top_score * 0.7) + (symptom_factor * 0.3)
-        return round(min(confidence, 0.95), 2)  # Cap at 95%
+        # Symptom coverage factor (need at least 3 for good confidence)
+        symptom_factor = min(len(symptoms) / 5, 1.0)
+        
+        # Matched ratio — how many of user's symptoms actually matched
+        matched_ratio = matched_count / len(symptoms) if symptoms else 0
+        
+        # Weighted confidence
+        confidence = (top_score * 0.4) + (symptom_factor * 0.25) + (matched_ratio * 0.35)
+        
+        # Penalize if very few symptoms matched
+        if matched_count <= 1:
+            confidence *= 0.5
+        
+        return round(min(confidence, 0.95), 2)
     
     def _should_call_vet(
         self,

@@ -374,8 +374,8 @@ function loadBreeds() {
 }
 
 async function submitPrediction() {
-  if (selectedSymptoms.length === 0) {
-    showToast('Select at least one symptom', 'warning');
+  if (selectedSymptoms.length < 2) {
+    showToast('Select at least 2 symptoms for accurate prediction', 'warning');
     return;
   }
 
@@ -429,11 +429,31 @@ function renderPredictionResults(data, imageData) {
   const container = document.getElementById('predictionResults');
   let html = '';
 
+  // ── LOW CONFIDENCE CHECK ──
+  if (data.low_confidence) {
+    const confPct = data.confidence ? Math.round(data.confidence * 100) : 0;
+    html += `<div style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.4);border-radius:var(--radius);padding:16px;margin-bottom:12px;">
+      <div style="font-weight:600;color:#F59E0B;margin-bottom:6px;">⚠️ Low Confidence (${confPct}%)</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">${data.low_confidence_message || 'Not enough information for a reliable diagnosis.'}</div>
+    </div>`;
+
+    if (data.diseases && data.diseases.length > 0) {
+      html += `<div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;">Possible matches (unreliable):</div>`;
+      data.diseases.forEach(d => {
+        html += `<div style="font-size:13px;color:var(--text-secondary);padding:4px 0;">• ${d.name} — ${d.match_score}% match</div>`;
+      });
+    }
+
+    container.innerHTML = html;
+    container.style.display = 'block';
+    return;
+  }
+
   // Overall severity
   if (data.severity) {
     const sev = data.severity.toLowerCase();
     html += `<div class="severity-strip ${sev}" style="border-radius:var(--radius);margin-bottom:12px;">
-      <span>⚠️</span> Overall Severity: <strong>${data.severity}</strong></div>`;
+      <span>⚠️</span> Overall Severity: <strong>${data.severity}</strong> · Confidence: <strong>${Math.round((data.confidence || 0) * 100)}%</strong></div>`;
   }
 
   // Disease cards
